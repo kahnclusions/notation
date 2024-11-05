@@ -7,7 +7,7 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-axum = { version = "0.7", optional = true }
+axum = { version = "0.7", features = ["macros"], optional = true }
 console_error_panic_hook = "0.1"
 leptos = { git = "https://github.com/leptos-rs/leptos", features = [
     "nightly",
@@ -29,6 +29,12 @@ tracing-subscriber = { version = "0.3.18", features = ["env-filter"], optional =
 tracing-tree = "0.4.0"
 uuid = { version = "1.11.0", features = ["v4", "v7", "serde", "fast-rng", "macro-diagnostics"] }
 chrono = { version = "0.4.38", features = ["serde"] }
+tailwind_fuse = { version = "0.3.1", features = ["variant"] }
+sqlx = { version = "0.8.2", features = ["runtime-tokio-native-tls", "sqlite", "uuid", "chrono", "json"], optional = true }
+anyhow = { version = "1.0.92", features = ["backtrace"] }
+parse-display = "0.10.0"
+serde = { version = "1.0.214", features = ["derive"] }
+serde_json = { version = "1.0.132", features = ["raw_value"] }
 
 [features]
 hydrate = ["leptos/hydrate", "uuid/js"]
@@ -42,7 +48,8 @@ ssr = [
     "leptos_meta/ssr",
     "leptos_router/ssr",
     "dep:tracing",
-    "dep:tracing-subscriber"
+    "dep:tracing-subscriber",
+    "dep:sqlx"
 ]
 
 # Defines a size-optimized profile for the WASM bundle in release mode

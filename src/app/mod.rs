@@ -1,9 +1,16 @@
+mod editor;
+mod page_nav;
+
+use editor::{EditorPage, EmptyPage};
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
     components::{Route, Router, Routes},
-    StaticSegment,
+    path, StaticSegment,
 };
+use page_nav::PageNav;
+
+use crate::ui::{anchor::A, typography::H3};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -16,7 +23,7 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
                 <HydrationScripts options/>
                 <MetaTags/>
             </head>
-            <body>
+            <body class="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
                 <App/>
             </body>
         </html>
@@ -37,25 +44,22 @@ pub fn App() -> impl IntoView {
         <Title text="Welcome to Leptos"/>
 
         // content for this welcome page
+        <div class="flex flex-row h-full items-stretch justify-between">
         <Router>
-            <main>
+            <aside class="p-3 bg-slate-100 dark:bg-slate-900 w-[248px] grow-0 shrink-0">
+                <h1 class="font-bold text-2xl font-display">"Notation"</h1>
+                <A href="/">"Home"</A>
+                <H3>Pages</H3>
+    <PageNav />
+            </aside>
+            <div class="w-[2px] bg-slate-200 dark:bg-slate-950 h-full"></div>
+            <main class="p-3 grow">
                 <Routes fallback=|| "Page not found.".into_view()>
-                    <Route path=StaticSegment("") view=HomePage/>
+                    <Route path=StaticSegment("") view=EmptyPage/>
+                    <Route path=path!("/page/:page_id") view=EditorPage/>
                 </Routes>
             </main>
         </Router>
-    }
-}
-
-/// Renders the home page of your application.
-#[component]
-fn HomePage() -> impl IntoView {
-    // Creates a reactive value to update the button
-    let count = RwSignal::new(0);
-    let on_click = move |_| *count.write() += 1;
-
-    view! {
-        <h1 class="font-bold text-2xl">"TakeNote"</h1>
-        <button on:click=on_click>"Click Me: " {count}</button>
+        </div>
     }
 }

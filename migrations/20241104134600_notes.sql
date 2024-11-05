@@ -3,13 +3,13 @@
 CREATE TABLE IF NOT EXISTS blocks
 (
     id          TEXT PRIMARY KEY NOT NULL,
-    type        TEXT NOT NULL, -- block type, such as: page, text, to-do, list, etc
+    kind        TEXT NOT NULL, -- block type, such as: page, text, to-do, list, etc
     parent_id   TEXT, -- parent ID that this block belongs to
-    content     TEXT, -- child IDs ordered. Missing IDs sort last.
-    props       BLOB,
-    start       TEXT,
-    end         TEXT,
-    done        BOOLEAN NOT NULL DEFAULT 0,
+    children    TEXT, -- child IDs ordered. Missing IDs sort last.
+    props       TEXT,
+    start       TEXT, -- start datetime
+    end         TEXT, -- end datetime
+    done        BOOLEAN NOT NULL DEFAULT 0, -- completed task
     FOREIGN KEY(parent_id) REFERENCES blocks(id)
 );
 

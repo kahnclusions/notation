@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	html, body {
+  	height: 100%;
+	}
+
+	a {
+  	text-decoration: underline;
+	}
+
+	* { -webkit-font-smoothing: antialiased; }
+}
+
+@layer base {
+  @font-face {
+    font-family: 'Playfair';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf") format('truetype');
+  }
+  @font-face {
+    font-family: InterVariable;
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("/fonts/Inter/InterVariable.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: Roca;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/rocaone-rg-webfont.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: InterVariable;
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("/fonts/Inter/InterVariable-Italic.woff2") format("woff2");
+  }
+}

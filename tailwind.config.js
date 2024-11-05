@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "media",
   content: {
     files: ["*.html", "./src/**/*.rs"],
     transform: {
@@ -7,6 +8,11 @@ module.exports = {
     },
   },
   theme: {
+        fontFamily: {
+            sans: ["InterVariable", "sans-serif"],
+            serif: ["Playfair", "Georgia"],
+            display: ["Roca"]
+        },
     extend: {},
   },
   plugins: [],
